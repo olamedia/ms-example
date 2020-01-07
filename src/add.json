@@ -1,0 +1,9 @@
+{
+  "$id": "add",
+  "type": "array",
+  "items": {
+    "minItems": 2,
+    "maxItems": 2,
+    "type": "number"
+  }
+}

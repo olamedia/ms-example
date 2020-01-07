@@ -1,0 +1,52 @@
+{
+  "name": "microfleet-example",
+  "version": "1.0.0",
+  "description": "Service example",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint ./src",
+    "start": "mfleet",
+    "compile": "babel -d ./lib --copy-files ./src",
+    "compileAndStart": "babel -d ./lib --copy-files ./src && mfleet",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "64": "^0.2.0",
+    "@hapi/hapi": "^18.4.0",
+    "@microfleet/core": "^15.7.0",
+    "@microfleet/transport-amqp": "^15.1.4",
+    "@microfleet/validation": "^8.1.2",
+    "bluebird": "^3.7.2",
+    "bluebird-retry": "^0.11.0",
+    "common-errors": "^1.0.5",
+    "debug": "^4.1.1",
+    "json": "^9.0.6",
+    "lodash": "^4.17.15",
+    "ms-conf": "^5.0.2",
+    "prom-client": "^11.5.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5"
+  },
+  "files": [
+    "src/",
+    "lib/",
+    "schemas/"
+  ],
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
+    "@babel/plugin-transform-strict-mode": "^7.7.4",
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^6.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-makeomatic": "^4.0.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-unicorn": "^15.0.1"
+  }
+}
