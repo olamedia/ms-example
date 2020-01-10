@@ -25,6 +25,7 @@ RUN \
 
 COPY ./schemas /app/schemas
 COPY ./src /app/src
+COPY ./tests /app/tests
 COPY ./migrations /app/migrations
 
 # RUN  chown -R node /app
