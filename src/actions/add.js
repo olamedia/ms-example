@@ -1,7 +1,7 @@
 const { ActionTransport } = require('@microfleet/core');
 
-function addAction() {
-  return 'Hello, world!\n';
+function addAction({ params }) {
+  return params[0] + params[1];
 }
 
 module.exports = addAction;

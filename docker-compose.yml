@@ -1,0 +1,27 @@
+version: '3.5'
+services:
+  ms-example:
+    container_name: ms-example
+    build:
+      context: ./
+      dockerfile: ./docker/api/Dockerfile
+    image: ms-example
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/app
+    depends_on:
+      - clickhouse
+    environment:
+      NODE_ENV: "10"
+  clickhouse:
+    # 8123 port for HTTP interface
+    # 9000 port for native client
+    image: yandex/clickhouse-server
+    ports:
+      - "8123:8123"
+    restart: on-failure
+    #volumes:
+    #  - ./storage/clickhouse:/var/lib/clickhouse
+

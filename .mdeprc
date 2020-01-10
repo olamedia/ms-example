@@ -1,0 +1,10 @@
+{
+  "node": "10.16.3",
+  "repo": "microfleet",
+  "p": "ms-example",
+  "nycCoverage": false,
+  "tests": "tests/**/*.test.js",
+  "test_framework": "jest --coverageDirectory <coverageDirectory> --detectOpenHandles --runTestsByPath",
+  "docker_compose": "./docker-compose.yml",
+  "rebuild": ["64"]
+}

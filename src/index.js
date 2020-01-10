@@ -9,13 +9,13 @@ module.exports = class ExampleService extends Microfleet {
 
 
     constructor(opts = {}) {
-      // merge({}, ExampleService.defaultOpts, opts)
-      super({
+      super(merge({}, ExampleService.defaultOpts, opts));
+      /*super({
         name: 'example',
         router: {
           extensions: { register: [] }, // this line disables some core features that we don't need yet
         },
-      });
+      });*/
 
       // config
       const { config } = this;

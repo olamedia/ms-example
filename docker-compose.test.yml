@@ -1,0 +1,21 @@
+version: '3.5'
+services:
+  test:
+    container_name: ms-example-test
+    build:
+      context: ./
+      dockerfile: ./docker/api/Dockerfile
+    restart: "no"
+    image: ms-example-test
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./:/app
+    depends_on:
+      - ms-example
+      - clickhouse
+    command: ['yarn', 'test']
+    environment:
+      NODE_ENV: "10"
+
+

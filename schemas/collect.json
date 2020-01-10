@@ -1,0 +1,64 @@
+{
+  "definitions": {},
+  "$id": "collect",
+  "type": "object",
+  "required": [
+    "client_id",
+    "action",
+    "subject",
+    "device",
+    "event_date"
+  ],
+  "properties": {
+    "client_id": {
+      "$id": "#/properties/client_id",
+      "type": "string",
+      "title": "The Client_id Schema",
+      "default": "",
+      "examples": [
+        "ba21e63e-659a-43fd-a2d0-26735870de8d"
+      ],
+      "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+    },
+    "action": {
+      "$id": "#/properties/action",
+      "type": "string",
+      "title": "The Action Schema",
+      "default": "",
+      "examples": [
+        "overlay open"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "subject": {
+      "$id": "#/properties/subject",
+      "type": "string",
+      "title": "The Subject Schema",
+      "default": "",
+      "examples": [
+        "overlay x"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "device": {
+      "$id": "#/properties/device",
+      "type": "string",
+      "title": "The Device Schema",
+      "default": "",
+      "examples": [
+        "phone"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "event_date": {
+      "$id": "#/properties/event_date",
+      "type": "string",
+      "title": "The Event_date Schema",
+      "default": "",
+      "examples": [
+        "2020-01-09"
+      ],
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    }
+  }
+}

@@ -8,10 +8,13 @@
     "start": "mfleet",
     "compile": "babel -d ./lib --copy-files ./src",
     "compileAndStart": "babel -d ./lib --copy-files ./src && mfleet",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "yarn run test:mocha",
+    "test:mocha": "mocha --recursive ./tests/mocha",
+    "test:jest": "jest --coverageDirectory ./coverage --detectOpenHandles --runTestsByPath --testNamePattern=.*\\.test\\.js --testPathPattern=tests/",
+    "semantic-release": "semantic-release"
   },
   "keywords": [],
-  "author": "",
+  "author": "olamedia <olamedia@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "64": "^0.2.0",
@@ -24,11 +27,15 @@
     "common-errors": "^1.0.5",
     "debug": "^4.1.1",
     "json": "^9.0.6",
+    "jsonwebtoken": "^8.5.1",
+    "jwa": "^2.0.0",
+    "knex": "^0.20.7",
     "lodash": "^4.17.15",
     "ms-conf": "^5.0.2",
     "prom-client": "^11.5.3",
     "request": "^2.88.0",
-    "request-promise": "^4.2.5"
+    "request-promise": "^4.2.5",
+    "uuid": "^3.3.3"
   },
   "files": [
     "src/",
@@ -41,12 +48,22 @@
     "@babel/plugin-proposal-class-properties": "^7.7.4",
     "@babel/plugin-proposal-object-rest-spread": "^7.7.7",
     "@babel/plugin-transform-strict-mode": "^7.7.4",
+    "@makeomatic/deploy": "^9.1.1",
     "babel-eslint": "^10.0.3",
+    "chai": "^4.2.0",
     "cross-env": "^6.0.3",
     "eslint": "^6.8.0",
     "eslint-config-makeomatic": "^4.0.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-unicorn": "^15.0.1"
+    "eslint-plugin-unicorn": "^15.0.1",
+    "jest": "^24.9.0",
+    "mocha": "^7.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
+      "prepare-commit-msg": "./node_modules/@makeomatic/deploy/git-hooks/prepare-commit-msg $HUSKY_GIT_PARAMS"
+    }
   }
 }
