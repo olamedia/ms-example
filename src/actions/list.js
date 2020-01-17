@@ -4,9 +4,6 @@ const Promise = require('bluebird');
 const jwt = require('jsonwebtoken');
 const clickhouseRequest = require('../utils/clickhouse-request');
 
-console.log(this);
-const { config } = this; // require('../config');
-
 const defaults = {
   start_date: null,
   end_date: null,
@@ -16,6 +13,7 @@ const defaults = {
 
 function listAction({ params }) {
   const service = this;
+  const { config } = this;
 
   const fixedParams = merge({}, defaults, params);
 
@@ -40,7 +38,7 @@ function listAction({ params }) {
   return Promise.all([
     // разбивку по <промежутку - час/день/неделя/тп> между временными рамками - <start_date/end_date> которая отдает количество открытий оверлея типа X
     // SELECT event_date, count(id) as count FROM all_hits WHERE event_date > AND event_date < GROUP BY event_date FORMAT JSON
-    clickhouseRequest(`SELECT event_date, count(id) as count FROM all_hits ${whereSql} GROUP BY event_date FORMAT JSON`)
+    clickhouseRequest().query(`SELECT event_date, count(id) as count FROM all_hits ${whereSql} GROUP BY event_date FORMAT JSON`)
       .then((response) => {
         const summary = JSON.parse(response.headers['x-clickhouse-summary']);
         service.log.debug('body:', response.body);
@@ -54,7 +52,7 @@ function listAction({ params }) {
         };
       }),
     // популярность девайсов в промежутке времени между X и Y
-    clickhouseRequest(`SELECT device, count(id) as count FROM all_hits ${whereSql} GROUP BY device FORMAT JSON`)
+    clickhouseRequest().query(`SELECT device, count(id) as count FROM all_hits ${whereSql} GROUP BY device FORMAT JSON`)
       .then((response) => {
         const summary = JSON.parse(response.headers['x-clickhouse-summary']);
         service.log.debug('body:', response.body);
@@ -68,7 +66,7 @@ function listAction({ params }) {
         };
       }),
     // наиболее популярный оверлей у device X
-    clickhouseRequest(`SELECT MAX(num) as count FROM (SELECT subject, count(id) as num FROM all_hits ${whereSql} GROUP BY subject) y FORMAT JSON`)
+    clickhouseRequest().query(`SELECT MAX(num) as count FROM (SELECT subject, count(id) as num FROM all_hits ${whereSql} GROUP BY subject) y FORMAT JSON`)
       .then((response) => {
         const summary = JSON.parse(response.headers['x-clickhouse-summary']);
         service.log.debug('body:', response.body);
@@ -112,5 +110,5 @@ module.exports = listAction;
 //   });
 // };// Promise.reject('access denied');
 
-listAction.auth = 'jwt';
+listAction.auth = 'jwtIsAdmin';
 listAction.transports = [ActionTransport.http];

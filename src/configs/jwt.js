@@ -3,7 +3,7 @@
  * @type {Object}
  */
 exports.jwt = {
-  defaultAudience: '*.localhost',
+  defaultAudience: 'http://ms-example',
   hashingFunction: 'HS256',
   issuer: 'ms-example',
   secret: 'i-hope-that-you-change-this-long-default-secret-in-your-app',

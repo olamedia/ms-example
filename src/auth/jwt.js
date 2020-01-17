@@ -2,7 +2,7 @@ const Promise = require('bluebird');
 const jwt = require('jsonwebtoken');
 const { ActionTransport } = require('@microfleet/core');
 
-module.exports = (request) => {
+module.exports = function jwtAuth(request) {
   if (request.transport !== ActionTransport.http) {
     return Promise.reject(new Error('HTTP transport allowed only'));
   }
@@ -20,17 +20,39 @@ module.exports = (request) => {
   }
 
   const { config } = this;
-  // const { users: { audience: defaultAudience, verify, timeouts } } = config;
-  // const timeout = timeouts.verify;
 
+  const {
+    defaultAudience, hashingFunction, issuer, ttl,
+  } = config.jwt;
 
-  console.log(`jwt token = ${token}`);
-  console.log(this, config);
-  console.log(`secret = ${config.accessTokens.secret}`);
+  const tokenData = jwt.decode(token, { complete: true });
 
-  if (!jwt.verify(token, config.accessTokens.secret, config.jwt)) {
+  console.log(tokenData);
+
+  const jwtSecret = config.jwt.secret;
+
+  const jwtVerifyOptions = {
+    algorithms: [hashingFunction],
+    audience: defaultAudience,
+    issuer,
+    ignoreExpiration: true,
+    maxAge: ttl,
+  };
+
+  const jwtSignOptions = {
+    algorithm: hashingFunction,
+    expiresIn: '12h',
+    audience: defaultAudience,
+    issuer,
+  };
+
+  const signedToken = jwt.sign(tokenData, jwtSecret, jwtSignOptions);
+
+  console.log({ signedToken });
+
+  if (!jwt.verify(token, jwtSecret, jwtVerifyOptions)) {
     return Promise.reject(new Error('jwt token verification failed'));
   }
 
-  return Promise.resolve('access granted');
+  return Promise.resolve(tokenData);
 };

@@ -1,4 +1,5 @@
 const jwt = require('./jwt');
+const jwtIsAdmin = require('./jwtIsAdmin');
 
 /**
  * Exports available auth strategies
@@ -6,4 +7,5 @@ const jwt = require('./jwt');
  */
 module.exports = {
   jwt,
+  jwtIsAdmin,
 };
