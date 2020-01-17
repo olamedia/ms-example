@@ -1,8 +1,11 @@
 const { ActionTransport } = require('@microfleet/core');
 const merge = require('lodash/merge');
 const Promise = require('bluebird');
+const jwt = require('jsonwebtoken');
 const clickhouseRequest = require('../utils/clickhouse-request');
 
+console.log(this);
+const { config } = this; // require('../config');
 
 const defaults = {
   start_date: null,
@@ -86,4 +89,28 @@ function listAction({ params }) {
 }
 
 module.exports = listAction;
+// listAction.allowed = (request, action, router) => {
+//   return new Promise((resolve, reject) => {
+//     // Authorization: Bearer <token>
+//     if (!('authorization' in request.headers)) {
+//       return reject(new Error('access denied'));
+//     }
+//     const authHeader = request.headers.authorization;
+//     const [tokenType, token] = authHeader.split(' ');
+//     if (tokenType !== 'Bearer') {
+//       return reject(new Error(`unknown authorization method ${tokenType}`));
+//     }
+//     console.log(`jwt token = ${token}`);
+//     console.log(this.config);
+//     console.log(request, action, router);
+//     console.log(`secret = ${config.accessTokens.secret}`);
+//     if (!jwt.verify(token, config.accessTokens.secret, config.jwt)) {
+//       return reject(new Error('jwt token verification failed'));
+//     }
+//
+//     return resolve('access granted');
+//   });
+// };// Promise.reject('access denied');
+
+listAction.auth = 'jwt';
 listAction.transports = [ActionTransport.http];

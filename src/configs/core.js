@@ -35,3 +35,15 @@ exports.validator = {
     $meta: 'ms-validation AJV schema validator options',
   },
 };
+
+/**
+ * @type {Object}
+ */
+exports.accessTokens = {
+  secret: {
+    $filter: 'env',
+    $default: 'dajskd12r1987das071241d-ar-01248120d7as-d98ays',
+    // NOTE: MAKE SURE TO SET THIS IN PRODUCTION
+    production: '',
+  },
+};

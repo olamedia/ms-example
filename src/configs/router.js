@@ -3,6 +3,8 @@ const { routerExtension, ActionTransport } = require('@microfleet/core');
 
 const { http } = ActionTransport;
 
+const strategies = require('../auth/strategies');
+
 /**
  * This extension defaults schemas to the name of the action
  * @type {Function}
@@ -18,7 +20,7 @@ const auditLog = routerExtension('audit/log');
 /**
  * Prometheus metrics
  */
-//const metrics = routerExtension('audit/metrics');
+// const metrics = routerExtension('audit/metrics');
 
 /**
  * Specifies configuration for the router of the microservice
@@ -27,14 +29,19 @@ const auditLog = routerExtension('audit/log');
 exports.router = {
   routes: {
     directory: path.resolve(__dirname, '../actions'),
-    //setTransportsAsDefault: false,
-    //transports: [http],
-    //prefix: 'example-prefix',
-    //enabledGenericActions: ['health'],
+    // setTransportsAsDefault: false,
+    // transports: [http],
+    // prefix: 'example-prefix',
+    // enabledGenericActions: ['health'],
   },
   extensions: {
     enabled: ['postRequest', 'preRequest', 'preResponse', 'postResponse'],
-    //register: [], metrics()
+    // register: [], metrics()
     register: [autoSchema, auditLog()],
+  },
+  auth: {
+    strategies: {
+      ...strategies,
+    },
   },
 };
