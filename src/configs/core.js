@@ -13,6 +13,7 @@ exports.name = 'example';
 exports.plugins = [
   'router',
   'http',
+  'amqp',
   'validator',
   'logger',
 ];

@@ -87,7 +87,8 @@ function listAction({ params }) {
 }
 
 module.exports = listAction;
-// listAction.allowed = (request, action, router) => {
+
+// listAction.allowed = function (request, action, router) {
 //   return new Promise((resolve, reject) => {
 //     // Authorization: Bearer <token>
 //     if (!('authorization' in request.headers)) {

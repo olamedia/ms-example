@@ -1,7 +1,7 @@
 const path = require('path');
 const { routerExtension, ActionTransport } = require('@microfleet/core');
 
-const { http } = ActionTransport;
+const { http, amqp } = ActionTransport;
 
 const strategies = require('../auth/strategies');
 
@@ -30,7 +30,7 @@ exports.router = {
   routes: {
     directory: path.resolve(__dirname, '../actions'),
     // setTransportsAsDefault: false,
-    // transports: [http],
+    transports: [http, amqp],
     // prefix: 'example-prefix',
     // enabledGenericActions: ['health'],
   },

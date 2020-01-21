@@ -10,23 +10,25 @@ module.exports = class ExampleService extends Microfleet {
 
     constructor(opts = {}) {
       super(merge({}, ExampleService.defaultOpts, opts));
-      /*super({
+      /* super({
         name: 'example',
         router: {
           extensions: { register: [] }, // this line disables some core features that we don't need yet
         },
-      });*/
+      }); */
 
       // config
       const { config } = this;
 
-
       this.on('plugin:connect:amqp', (amqp) => {
-        debug('amqp connected');
+        console.log('AMQP connected');
       });
 
+      this.on('plugin:start:amqp', () => {
+        console.log('AMQP started');
+      });
       this.on('plugin:start:http', () => {
-        debug('Http started');
+        console.log('HTTP started');
       });
     }
 };

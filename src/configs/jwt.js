@@ -3,25 +3,9 @@
  * @type {Object}
  */
 exports.jwt = {
-  defaultAudience: 'http://ms-example',
-  hashingFunction: 'HS256',
+  audience: 'http://ms-example',
+  algorithm: 'HS256',
   issuer: 'ms-example',
   secret: 'i-hope-that-you-change-this-long-default-secret-in-your-app',
   ttl: 30 * 24 * 60 * 60 * 1000, // 30 days in ms
-  cookies: {
-    enabled: false,
-    name: 'jwt',
-    settings: {
-      isHttpOnly: true,
-      isSecure: {
-        $filter: 'env',
-        $default: false,
-        production: true,
-      },
-      path: '/',
-      domain: null,
-      ttl: 1209600,
-      isSameSite: 'Lax',
-    },
-  },
 };

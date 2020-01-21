@@ -22,7 +22,7 @@ module.exports = function jwtAuth(request) {
   const { config } = this;
 
   const {
-    defaultAudience, hashingFunction, issuer, ttl,
+    audience, algorithm, issuer, ttl,
   } = config.jwt;
 
   const tokenData = jwt.decode(token, { complete: true });
@@ -32,17 +32,17 @@ module.exports = function jwtAuth(request) {
   const jwtSecret = config.jwt.secret;
 
   const jwtVerifyOptions = {
-    algorithms: [hashingFunction],
-    audience: defaultAudience,
+    algorithms: [algorithm],
+    audience,
     issuer,
     ignoreExpiration: true,
     maxAge: ttl,
   };
 
   const jwtSignOptions = {
-    algorithm: hashingFunction,
+    algorithm,
     expiresIn: '12h',
-    audience: defaultAudience,
+    audience,
     issuer,
   };
 

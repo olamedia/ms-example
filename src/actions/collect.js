@@ -20,4 +20,4 @@ async function collectAction({ params }) {
 }
 
 module.exports = collectAction;
-collectAction.transports = [ActionTransport.http];
+collectAction.transports = [ActionTransport.http, ActionTransport.amqp];

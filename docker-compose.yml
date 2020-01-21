@@ -1,5 +1,6 @@
 version: '3.5'
 services:
+  
   ms-example:
     container_name: ms-example
     build:
@@ -12,9 +13,19 @@ services:
     volumes:
       - ./:/app
     depends_on:
+      - rabbitmq
       - clickhouse
     environment:
       NODE_ENV: "10"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "3001:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: "ms-example"
+      RABBITMQ_DEFAULT_PASS: "ms-example"
+
   clickhouse:
     # 8123 port for HTTP interface
     # 9000 port for native client
