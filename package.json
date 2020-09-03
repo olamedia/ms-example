@@ -18,7 +18,7 @@
   "license": "ISC",
   "dependencies": {
     "64": "^0.2.0",
-    "@hapi/hapi": "^18.4.0",
+    "@hapi/hapi": "^19.1.1",
     "@microfleet/core": "^15.7.0",
     "@microfleet/transport-amqp": "^15.1.4",
     "@microfleet/validation": "^8.1.2",
