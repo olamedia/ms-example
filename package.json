@@ -30,7 +30,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwa": "^2.0.0",
     "knex": "^0.20.7",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "ms-conf": "^5.0.2",
     "prom-client": "^11.5.3",
     "request": "^2.88.0",
